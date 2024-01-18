@@ -1,4 +1,5 @@
 import cv2 as cv
+import time
 
 camera_device = 0
 # -- 2. Read the video stream
@@ -13,5 +14,20 @@ while True:
         break
     cv.imshow("Video", frame)
     # Mã ASCII của ESC là 27
-    if cv.waitKey(10) == 27:
+    key = cv.waitKey(10)
+    if key == 27:
         break
+    if key == ord("s") or key == ord("S"):
+        t = time.localtime()
+        filename = (
+            "XuLyAnhSo\co_ban\screenshot\image_%04d_%02d_%02d_%02d_%02d_%02d.jpg"
+            % (
+                t.tm_year,
+                t.tm_mon,
+                t.tm_mday,
+                t.tm_hour,
+                t.tm_min,
+                t.tm_sec,
+            )
+        )
+        cv.imwrite(filename, frame)
