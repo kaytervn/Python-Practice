@@ -85,13 +85,16 @@ def visualize(input, faces, fps, thickness=2):
                     idx, face[0], face[1], face[2], face[3], face[-1]
                 )
             )
-
+            if checkValidFace(input, face):
+                color = (0, 255, 0)
+            else:
+                color = (0, 0, 255)
             coords = face[:-1].astype(np.int32)
             cv.rectangle(
                 input,
                 (coords[0], coords[1]),
                 (coords[0] + coords[2], coords[1] + coords[3]),
-                (0, 255, 0),
+                color,
                 thickness,
             )
             cv.circle(input, (coords[4], coords[5]), 2, (255, 0, 0), thickness)
@@ -108,6 +111,26 @@ def visualize(input, faces, fps, thickness=2):
         (0, 255, 0),
         2,
     )
+    cv.putText(
+        input,
+        "FPS: {:.2f}".format(fps),
+        (1, 16),
+        cv.FONT_HERSHEY_SIMPLEX,
+        0.5,
+        (0, 255, 0),
+        2,
+    )
+
+
+def checkValidFace(frame, face_box):
+    face_align = recognizer.alignCrop(frame, face_box)
+    face_feature = recognizer.feature(face_align)
+    test_predict = svc.predict(face_feature)
+    confidence = np.max(np.abs(svc.decision_function(face_feature)))
+    if confidence > args.score_threshold:
+        return test_predict
+    else:
+        return None
 
 
 if __name__ == "__main__":
@@ -144,17 +167,25 @@ if __name__ == "__main__":
         if key == 27:
             break
         if faces[1] is not None:
-            face_align = recognizer.alignCrop(frame, faces[1][0])
-            face_feature = recognizer.feature(face_align)
-            test_predict = svc.predict(face_feature)
-            result = mydict[test_predict[0]]
-            cv.putText(
-                frame, result, (1, 50), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2
-            )
-
+            for face_box in faces[1]:
+                test_predict = checkValidFace(frame, face_box)
+                if test_predict:
+                    result = mydict[test_predict[0]]
+                    color = (0, 255, 0)
+                else:
+                    result = "Unknown"
+                    color = (0, 0, 255)
+                cv.putText(
+                    frame,
+                    result,
+                    (int(face_box[0]), int(face_box[1]) - 10),
+                    cv.FONT_HERSHEY_SIMPLEX,
+                    0.5,
+                    color,
+                    2,
+                )
         # Draw results on the input image
         visualize(frame, faces, tm.getFPS())
-
         # Visualize results
         cv.imshow("Live", frame)
     cv.destroyAllWindows()
