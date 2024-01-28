@@ -1,0 +1,5 @@
+Chạy cmd bằng lệnh:
+python object_detector.py
+
+Sau đó, Mở đường dẫn sau trên trình duyệt: 
+http:///localhost:8080
