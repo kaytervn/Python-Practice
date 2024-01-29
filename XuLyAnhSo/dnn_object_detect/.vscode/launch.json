@@ -13,9 +13,9 @@
             "justMyCode": true,
             "args": [
                 "--input",
-                "image06.jpg",
+                "test_images\\image(2).jpg",
                 "--model",
-                "road_signs.onnx",
+                "ktr_dataset.onnx",
                 "--scale",
                 "0.00392",
                 "--width",
@@ -26,7 +26,7 @@
                 "--postprocessing",
                 "yolov8",
                 "--classes",
-                "road_signs.txt"
+                "ktr_dataset.txt"
             ]
         }
     ]
