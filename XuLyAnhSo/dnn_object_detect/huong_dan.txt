@@ -11,7 +11,7 @@ Chạy trên VSCode:
         "--input",
         "image06.jpg",
         "--model",
-        "road_signs.onnx",
+        "ktr_dataset.onnx",
         "--scale",
         "0.00392",
         "--width",
@@ -22,7 +22,7 @@ Chạy trên VSCode:
         "--postprocessing",
         "yolov8",
         "--classes",
-        "road_signs.txt"
+        "ktr_dataset.txt"
     ]
 Camera:
 Đổi dòng code: cap = cv.VideoCapture(0)
