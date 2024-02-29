@@ -57,7 +57,6 @@ def process_output(out, box_scale):
 
 def drawPred(frame, classId, conf, left, top, right, bottom):
     cv.rectangle(frame, (left, top), (right, bottom), (0, 255, 0))
-
     label = f"{classes[classId]}: {conf:.2f}"
     labelSize, baseLine = cv.getTextSize(label, cv.FONT_HERSHEY_SIMPLEX, 0.5, 1)
     top = max(top, labelSize[1])
