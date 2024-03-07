@@ -2088,3 +2088,9 @@ if "ơ" in word:
 else:
     print("False")
 # %%
+a = int(input('a = '))
+b = int(input('b = '))
+m = int(input('m = '))
+
+print((a+4*m+b)/6)
+# %%
