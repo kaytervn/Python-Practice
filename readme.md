@@ -1,7 +1,7 @@
 <h2>Install Python Library</h2>
 
 - Run CMD
-- Mount to folder `Scripts` at the location of specific Python version
+- Move to the folder `Scripts` path at the location of a specific Python version
 
 ```cmd
 cd C:\Users\..\AppData\Local\Programs\Python\Python311\Scripts
@@ -11,11 +11,11 @@ cd C:\Users\..\AppData\Local\Programs\Python\Python311\Scripts
 
 <h2>Select Interpreter on VS Code</h2>
 
-- Press Shortcut `Ctrl` + `Shift` + `P`
+- Press shortcut `Ctrl` + `Shift` + `P`
 
 <h2>Run file Python by CMD/Terminal</h2>
 
-- Mount to Python file: `cd D:\..\..\hello.py`
+- Change the path to the Python file: `cd D:\..\..\hello.py`
 
 1. Default (Run the lastest Python version on your PC):
 
