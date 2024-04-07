@@ -2100,3 +2100,48 @@ m = int(input("m = "))
 
 print("ET: ", (a + 4 * m + b) / 6)
 # %%
+class MyBigNumber:
+    def __init__(self):
+        self.log = []
+
+    def sum(self, stn1, stn2):
+        # Đảo ngược chuỗi để dễ cộng từ phải sang trái
+        stn1 = stn1[::-1]
+        stn2 = stn2[::-1]
+
+        result = ""
+        carry = 0
+
+        # Duyệt chuỗi từ phải sang trái
+        for i in range(max(len(stn1), len(stn2))):
+            # Lấy số tại vị trí i, nếu không có thì coi là 0
+            digit1 = int(stn1[i]) if i < len(stn1) else 0
+            digit2 = int(stn2[i]) if i < len(stn2) else 0
+
+            # Cộng các chữ số và lưu lại nhớ
+            total = digit1 + digit2 + carry
+            carry = total // 10
+            result = str(total % 10) + result
+
+            # Ghi log lại các bước tính toán
+            self.log.append(
+                f"Bước {i+1}: {digit1} + {digit2} + {carry} = {total} (ghi lại {total%10}, nhớ {total//10})"
+            )
+
+        # Nếu vẫn còn số nhớ thì thêm vào kết quả
+        if carry:
+            result = str(carry) + result
+
+        return result
+
+
+# Sử dụng lớp MyBigNumber
+big_number = MyBigNumber()
+result = big_number.sum("9065896858468904568450943", "984379586982386689023")
+print(f"Kết quả: {result}")
+
+# Hiển thị lịch sử tính toán
+for step in big_number.log:
+    print(step)
+
+# %%
