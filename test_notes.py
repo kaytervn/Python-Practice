@@ -2137,7 +2137,7 @@ class MyBigNumber:
 
 # Sử dụng lớp MyBigNumber
 big_number = MyBigNumber()
-result = big_number.sum("9065896858468904568450943", "984379586982386689023")
+result = big_number.sum("00000000112312", "984379586982386689023")
 print(f"Kết quả: {result}")
 
 # Hiển thị lịch sử tính toán
